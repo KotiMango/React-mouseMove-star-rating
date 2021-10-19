@@ -63,25 +63,11 @@ export default function Stars() {
     setStarArray(new Array(5).fill(0));
   };
 
-  const mausEnd = (ev, idx) => {
-    console.log(ev.nativeEvent.offsetX);
-    if (ev.nativeEvent.offsetX > 0 && updateStarArr(idx, 1)) {
-      ev.target.classList.remove('half');
-      ev.target.classList.add('on');
-    } else {
-      const starArr = updateStarArr(idx, 0);
-      if (starArr) {
-        ev.target.classList.remove('on', 'half');
-      }
-    }
-  };
-
   let starBois = new Array(5)
     .fill(0)
     .map((star, idx) => (
       <span
         onMouseMove={(ev) => mauser(ev, idx)}
-        onMouseLeave={(ev, idx) => mausEnd(ev, idx)}
         className='star'
         aria-hidden='true'
         key={idx}
@@ -129,7 +115,7 @@ export default function Stars() {
         top: '50%',
         right: '50%',
         transform: 'translate(50%, -50%)',
-        transform: 'scale(2)',
+        transform: 'scale(3)',
         textAlign: 'center',
       }}
     >
