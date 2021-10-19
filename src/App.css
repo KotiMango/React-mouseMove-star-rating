@@ -1,3 +1,4 @@
+@import '~@fortawesome/fontawesome-free/css/fontawesome.css';
 .App {
   text-align: center;
 }
@@ -35,4 +36,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.star {
+  font-size: x-large;
+  width: 50px;
+  display: inline-block;
+  color: gray;
+}
+.star:last-child {
+  margin-right: 0;
+}
+.star:before {
+  content: '\2605';
+}
+.star.on {
+  color: gold;
+}
+.star.half:after {
+  content: '\2605';
+  color: gold;
+  position: absolute;
+  margin-left: -20px;
+  width: 10px;
+  overflow: hidden;
+}
+
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
 }
