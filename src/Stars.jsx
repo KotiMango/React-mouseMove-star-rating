@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { roundToHalf } from './utils';
 export default function Stars() {
   const [starArray, setStarArray] = useState(new Array(5).fill(0));
@@ -63,11 +63,25 @@ export default function Stars() {
     setStarArray(new Array(5).fill(0));
   };
 
+  const mausEnd = (ev, idx) => {
+    console.log(ev.nativeEvent.offsetX);
+    if (ev.nativeEvent.offsetX > 0 && updateStarArr(idx, 1)) {
+      ev.target.classList.remove('half');
+      ev.target.classList.add('on');
+    } else {
+      const starArr = updateStarArr(idx, 0);
+      if (starArr) {
+        ev.target.classList.remove('on', 'half');
+      }
+    }
+  };
+
   let starBois = new Array(5)
     .fill(0)
     .map((star, idx) => (
       <span
         onMouseMove={(ev) => mauser(ev, idx)}
+        onMouseLeave={(ev, idx) => mausEnd(ev, idx)}
         className='star'
         aria-hidden='true'
         key={idx}
@@ -106,6 +120,7 @@ export default function Stars() {
     });
     return avgStarBois;
   };
+
   let averageRatingStars = renderAvg();
   return (
     <div
