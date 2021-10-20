@@ -1,4 +1,3 @@
-https://lucid-payne-0316f1.netlify.app/
 Star rating on mousemove with half stars. 
 The user can submit rating via submit button 
 Average rating is displayed and so as the current rating of rendered stars 
