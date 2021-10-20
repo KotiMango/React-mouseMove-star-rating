@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { roundToHalf } from './utils';
+import {
+  getWorkIdx,
+  renderAvg,
+  getRatingStars,
+  getAvgRating,
+  getStarRating,
+} from './stars-service';
+
 export default function Stars() {
   const [starArray, setStarArray] = useState(new Array(5).fill(0));
   const [ratingArr, setRatingArr] = useState([]);
   const [isRenderAvg, setIsRenderAvg] = useState(false);
 
+  const currStarRating = getStarRating(starArray);
+  const avgRating = getAvgRating(ratingArr);
+
   const updateStarArr = (idx, rate) => {
     const fractionRateFlag = starArray.some((star) => star === 0.5);
-    const workIdx =
-      starArray.findIndex((star) => star === 0.5) !== -1
-        ? starArray.findIndex((star) => star === 0.5)
-        : starArray.findIndex((star) => star === 0) !== -1
-        ? starArray.findIndex((star) => star === 0)
-        : idx;
+    const workIdx = getWorkIdx(starArray, idx);
     if (
       idx !== starArray.lastIndexOf(fractionRateFlag ? 0.5 : 1) &&
       idx !== workIdx
@@ -31,9 +36,8 @@ export default function Stars() {
     }
   };
 
-  const mauser = (ev, idx) => {
+  const onMouseStar = (ev, idx) => {
     const starCursorPos = ev.nativeEvent.offsetX;
-    console.log('* | mauser | starCursorPos', starCursorPos);
     if (starCursorPos > 34 && updateStarArr(idx, 1)) {
       ev.target.classList.remove('half');
       ev.target.classList.add('on');
@@ -48,80 +52,20 @@ export default function Stars() {
     }
   };
 
-  const currStarRating = starArray.reduce((a, b) => a + b, 0);
-  const avgRating =
-    Array.isArray(ratingArr) && ratingArr.length
-      ? ratingArr.reduce((a, b) => a + b, 0) / ratingArr.length
-      : 0;
-
   const submitRate = () => {
-    if (isRenderAvg) {
-      setIsRenderAvg(false);
-      return;
-    }
+    if (isRenderAvg) return setIsRenderAvg(false);
     setRatingArr((prevState) => [...prevState, currStarRating]);
     setIsRenderAvg(true);
     setStarArray(new Array(5).fill(0));
   };
 
-  let starBois = new Array(5)
-    .fill(0)
-    .map((star, idx) => (
-      <span
-        onMouseMove={(ev) => mauser(ev, idx)}
-        className='star'
-        aria-hidden='true'
-        key={idx}
-      ></span>
-    ));
+  let ratingStars = getRatingStars(onMouseStar);
+  let averageRatingStars = renderAvg(avgRating);
 
-  const renderAvg = () => {
-    const roundedAvg = roundToHalf(avgRating);
-    const avgStarBois = starBois.map((star, idx) => {
-      const starPos = idx;
-      if (roundedAvg > starPos) {
-        if (roundedAvg - starPos === 0.5)
-          return (
-            <span
-              className='star half'
-              aria-hidden='true'
-              key={idx + 10}
-            ></span>
-          );
-        return (
-          <span
-            className='star on'
-            aria-hidden='true'
-            key={idx + 10}
-          ></span>
-        );
-      } else {
-        return (
-          <span
-            className='star'
-            aria-hidden='true'
-            key={idx + 10}
-          ></span>
-        );
-      }
-    });
-    return avgStarBois;
-  };
-
-  let averageRatingStars = renderAvg();
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: '50%',
-        right: '50%',
-        transform: 'translate(50%, -50%)',
-        transform: 'scale(3)',
-        textAlign: 'center',
-      }}
-    >
+    <div className='stars-container'>
       <h1>Avg Rating:{avgRating.toFixed(2)}</h1>
-      {isRenderAvg ? averageRatingStars : starBois}
+      {isRenderAvg ? averageRatingStars : ratingStars}
       <div>
         Current Rating:
         {isRenderAvg ? ' AVG' : currStarRating}
