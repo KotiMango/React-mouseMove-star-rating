@@ -124,9 +124,7 @@ export default function Stars() {
       {isRenderAvg ? averageRatingStars : starBois}
       <div>
         Current Rating:
-        {isRenderAvg
-          ? ' Displaying Average Star Rate'
-          : currStarRating}
+        {isRenderAvg ? ' AVG' : currStarRating}
       </div>
       <button className='button' onClick={submitRate}>
         {isRenderAvg ? 'Rate' : 'Submit'}
