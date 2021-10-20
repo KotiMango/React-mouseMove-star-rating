@@ -6,7 +6,7 @@ export function roundToHalf(rawAvgFloat) {
   return roundedNum + 0.5;
 }
 
-export const renderStars = (avgRating, func = null) => {
+export const renderStars = (avgRating, submitRate, func = null) => {
   const roundedAvg = roundToHalf(avgRating);
   const elStarArr = new Array(5).fill(0).map((star, idx) => {
     const starPos = idx;
@@ -14,6 +14,7 @@ export const renderStars = (avgRating, func = null) => {
       if (roundedAvg - starPos === 0.5)
         return (
           <span
+            onClick={submitRate}
             onMouseMove={(ev) => (func ? func(ev, idx) : '')}
             className='star half'
             aria-hidden='true'
@@ -22,6 +23,7 @@ export const renderStars = (avgRating, func = null) => {
         );
       return (
         <span
+          onClick={submitRate}
           onMouseMove={(ev) => (func ? func(ev, idx) : '')}
           className='star on'
           aria-hidden='true'
@@ -31,6 +33,7 @@ export const renderStars = (avgRating, func = null) => {
     } else {
       return (
         <span
+          onClick={submitRate}
           onMouseMove={(ev) => (func ? func(ev, idx) : '')}
           className='star '
           aria-hidden='true'

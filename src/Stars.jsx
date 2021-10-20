@@ -28,8 +28,8 @@ export default function Stars() {
     setIsRenderAvg(true);
   };
 
-  let ratingStars = renderStars(starRate, onMouseStar);
-  let averageRatingStars = renderStars(avgRating);
+  let ratingStars = renderStars(starRate, submitRate, onMouseStar);
+  let averageRatingStars = renderStars(avgRating, submitRate);
 
   return (
     <div className='stars-container'>
@@ -40,9 +40,6 @@ export default function Stars() {
           Current Rating:
           {isRenderAvg ? ' AVG' : starRate}
         </div>
-        <button className='button' onClick={submitRate}>
-          {isRenderAvg ? 'Rate' : 'Submit'}
-        </button>
       </div>
     </div>
   );

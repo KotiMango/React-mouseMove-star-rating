@@ -43,9 +43,12 @@
   right: 50%;
   transform: translate(50%, -50%);
   text-align: center;
+  cursor: default;
+  caret-color: rgba(0, 0, 0, 0);
 }
 .stars {
   transform: scale(2);
+  cursor: pointer;
 }
 .star {
   font-size: x-large;
@@ -81,10 +84,4 @@
   display: inline-block;
   font-size: 16px;
   margin-top: 10px;
-}
-@media only screen and (max-width: 425px) {
-  .star.half:after {
-    margin-left: -24px;
-    width: 12px;
-  }
 }
