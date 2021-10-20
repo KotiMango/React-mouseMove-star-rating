@@ -64,15 +64,17 @@ export default function Stars() {
 
   return (
     <div className='stars-container'>
-      <h1>Avg Rating:{avgRating.toFixed(2)}</h1>
-      {isRenderAvg ? averageRatingStars : ratingStars}
-      <div>
-        Current Rating:
-        {isRenderAvg ? ' AVG' : currStarRating}
+      <div className='stars'>
+        <h1>Avg Rating:{avgRating.toFixed(2)}</h1>
+        {isRenderAvg ? averageRatingStars : ratingStars}
+        <div>
+          Current Rating:
+          {isRenderAvg ? ' AVG' : currStarRating}
+        </div>
+        <button className='button' onClick={submitRate}>
+          {isRenderAvg ? 'Rate' : 'Submit'}
+        </button>
       </div>
-      <button className='button' onClick={submitRate}>
-        {isRenderAvg ? 'Rate' : 'Submit'}
-      </button>
     </div>
   );
 }
