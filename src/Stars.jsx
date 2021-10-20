@@ -33,10 +33,11 @@ export default function Stars() {
 
   const mauser = (ev, idx) => {
     const starCursorPos = ev.nativeEvent.offsetX;
-    if (starCursorPos > 15 && updateStarArr(idx, 1)) {
+    console.log('* | mauser | starCursorPos', starCursorPos);
+    if (starCursorPos > 34 && updateStarArr(idx, 1)) {
       ev.target.classList.remove('half');
       ev.target.classList.add('on');
-    } else if (starCursorPos < 5 && updateStarArr(idx, 0)) {
+    } else if (starCursorPos < 25 && updateStarArr(idx, 0)) {
       ev.target.classList.remove('on', 'half');
     } else {
       const starArr = updateStarArr(idx, 0.5);
