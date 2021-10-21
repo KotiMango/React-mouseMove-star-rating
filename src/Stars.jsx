@@ -10,9 +10,10 @@ export default function Stars() {
 
   const onMouseStar = (ev, idx) => {
     const starCursorPos = ev.nativeEvent.offsetX;
-    if (starCursorPos > 24) {
+    console.log('* | onMouseStar | starCursorPos', starCursorPos);
+    if (starCursorPos > 20) {
       setStarRate(idx + 1);
-    } else if (starCursorPos < 14) {
+    } else if (starCursorPos < 10) {
       setStarRate(idx);
     } else {
       setStarRate(idx + 0.5);
