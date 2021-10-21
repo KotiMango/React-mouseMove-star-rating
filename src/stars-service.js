@@ -1,3 +1,5 @@
+import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
+
 export function roundToHalf(rawAvgFloat) {
   let roundedNum = Math.floor(rawAvgFloat);
   if (rawAvgFloat - roundedNum < 0.5) {
@@ -16,29 +18,35 @@ export const renderStars = (avgRating, submitRate, func = null) => {
           <span
             onClick={submitRate}
             onMouseMove={(ev) => (func ? func(ev, idx) : '')}
-            className='star half'
+            className='star'
             aria-hidden='true'
             key={func ? idx : idx + 10}
-          ></span>
+          >
+            <BsStarHalf color='gold' />
+          </span>
         );
       return (
         <span
           onClick={submitRate}
           onMouseMove={(ev) => (func ? func(ev, idx) : '')}
-          className='star on'
+          className='star'
           aria-hidden='true'
           key={func ? idx : idx + 10}
-        ></span>
+        >
+          <BsStarFill color='gold' />
+        </span>
       );
     } else {
       return (
         <span
           onClick={submitRate}
           onMouseMove={(ev) => (func ? func(ev, idx) : '')}
-          className='star '
+          className='star'
           aria-hidden='true'
           key={func ? idx : idx + 10}
-        ></span>
+        >
+          <BsStar color='gold' />
+        </span>
       );
     }
   });
